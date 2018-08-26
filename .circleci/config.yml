@@ -9,12 +9,17 @@ jobs:
           name: get submodule
           command: git submodule update --init
       - run:
+          name: Prepare QR code for this build
+          command: |
+            make initdir
+            pip3 install qrcode
+            qr https://github.com/K4zuki/greenpak-personal-appsnote/releases/download/build-`git rev-parse --short HEAD`/SLG45826TRY-`git rev-parse --short HEAD`.pdf > images/QRcode.png
+      - run:
           name: Make HTML
           command: make initdir html
       - run:
           name: Make PDF
           command: make initdir pdf
-
       - run:
           name: Deploy preparation
           command: |

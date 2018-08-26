@@ -1,0 +1,13 @@
+{
+  signal: [
+    {name: "1", wave: "01..0.1", node: ".a..b.c."},
+    {name: "0", wave: "01.0..1", node: ".d.e..f."},
+    {},
+    {name: "STR", wave: "10|...1", node: ".g....h"},
+  ],
+edge: [
+    "a<>b 800±150ns", "b<>c 450150ns",
+    "d<>e 400±150ns", "e<>f 850150ns",
+    "g-h >50us"
+  ]
+}
