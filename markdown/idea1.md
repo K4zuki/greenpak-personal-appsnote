@@ -9,38 +9,66 @@ NeoPixelというのは、いわゆるテープLEDによく使われている、
 という個人的な反省を兼ねて、最初はこのRGB LEDを光らせます。GreenPAKの規模ではバッファメモリを
 持たせたりするのは難しいので、乱数生成器を内蔵させてランダムっぽく光らせます。
 
-#### プロトコルよくわからん {.unnumbered}
+*ここでは"WS2812B"のデータシート(秋月のサイト[^ws2818b-aki]から入手)を参照します。*
+
+[^ws2818b-aki]: http://akizukidenshi.com/catalog/g/gI-07915
+
+## 下調べ：データ転送プロトコル {#sec:study-protocol}
 
 ちゃんとプロトコルから述べているブログが少ないようなので、自分で調べるところからやります
 ^[ｴｲﾀﾞﾌﾙｰﾄ=ｻﾝのライブラリを{使って|移植して}ハイおしまい、っていうのばかりでした]。
+
+\\xout{とっても読みにくい}データシートを読んでみると、GRBの順で各8ビット、全24ビットのシリアルデータを
+書き込み、ストローブとして50us以上"L"にするとLED内に取り込まれるようです。
+シリアルデータの1/0はH/Lの割合で判定されます([@fig:data-transfer-time])。
+1ビットあたり1250nsなので800KHzのシリアルデータをデューティーを変えながら送り込むことになります。
+許容差が+/-300ns[^torelance]あるので950〜1550nsの範囲で周期が変わることは許容されそうです。
+
+[^torelance]: データシートには+/-600nsとあるのですがどちらが正しいんでしょうか。
+
+[neopixel](data/neopixel.yaml){.wavedrom #fig:data-transfer-time}
+
+::: rmnote
+
+Table: Data transfer time(T~H~ + T~L~ = 1250 +/-600ns) {#tbl:data-transfer-time}
+
+| Logic | T~H~ | T~L~ | Torelance | Unit |
+|:-----:|:----:|:----:|:---------:|:-----|
+|   1   | 800  | 450  |  +/-150   | ns   |
+|   0   | 400  | 850  |  +/-150   |      |
+
+:::
 
 \\newpage
 
 ## 全体図
 
-全体図を示します([@fig:neopixel-overview])。左上がクロック生成器([])、右側は上段から
-通信プロトコル生成器([@sec:protocol-generator])、擬似乱数生成器([@sec:lfsr])、
+作った回路の全体図を示します([@fig:neopixel-overview])。左上がクロック生成器([@sec:clock-generator])、
+右側は上段から通信プロトコル生成器([@sec:protocol-generator])、擬似乱数生成器([@sec:lfsr])、
 ストローブ生成器([])です。
 
 ![全体図](images/idea1/overview.png){#fig:neopixel-overview}
 
 \\newpage
 
-## オシレータの設定
+## クロック生成器 {#sec:clock-generator}
 
-この回路では最終的に2つの異なる周波数のクロックが必要になります([@tbl:clock-source])。
-このうち800KHzはOSC1から生成しました。400/800nsの生成には高周波数が必要なので25MHzを使いました。
+この回路では最終的に2つの異なる周波数のクロック源が必要になりました([@tbl:clock-source])。
+このうち800KHzはOSC1から生成しました。400/800nsの生成には高周波数が必要なのでOSC2(25MHz)を使いました。
 
-`800KHz`を得るには原発振2.048MHzを2逓倍したあと5分周します。
-4MHz(4.096MHz)はOUT1の出力に`P-DLYr`マクロセルをつなげ、両エッジ検出モードにします
-([@tbl:config-edgedet])。5分周には`DLY/CNT`マクロセルをカウンタとして1個使います([])。
+`800KHz`を得るために原発振2MHzを2逓倍したあと5分周します。
+OUT0(2MHz)の出力に`P-DLY`マクロセルをつなげ、両エッジ検出モードにして立ち上がり・立ち下がりエッジごとに
+パルスを出させることで逓倍できます([@tbl:config-progdelay])。
+5分周には`DLY/CNT`マクロセルをカウンタとして1個使います([@tbl:config-cnt1])。
 
 Table: 必要なクロック {#tbl:clock-source}
 
-|  Frequency  |               Purpose               |
-|:-----------:|:-----------------------------------:|
-|  `800KHz`   |         LFSR/protcol clock          |
-| 400ns/800ns | NeoPixel protocol timing generation |
+|   Frequency   |                     Purpose                      |
+|:-------------:|:------------------------------------------------:|
+| 2MHz[^not-2M] |           LFSR/protcol clock(`800KHz`)           |
+|     25MHz     | NeoPixel protocol timing generation(400ns/800ns) |
+
+[^not-2M]: SLG46826だと厳密には2.048MHzですが、LED側がタイミング的にゆるいのでこちらの定義もゆるめで行きます
 
 ![OSC1周辺回路](images/idea1/clock-gen.png){#fig:osc1-config}
 
@@ -88,8 +116,10 @@ witdh:
 "Multi-function mode","CNT/DLY",""
 "Mode","Reset counter",""
 "counter data","4",""
-"Clock","Ext. Clk. (From matrix)"
+"Clock","Ext. Clk. (From matrix)",""
 ```
+
+\\newpage
 
 ## 擬似乱数生成器 {#sec:lfsr}
 
@@ -123,12 +153,10 @@ witdh:
     - 0.3
 ---
 "Option","Value","Note"
-"OUT0 PD num","14",
+"OUT0 PD num","14",""
 ```
 
 ## NeoPixelの通信プロトコル生成器 {#sec:protocol-generator}
-
-*ここでは"WS2812B[^ws2818b-aki]"のデータシート(秋月のサイトから入手)を参照します。*
 
 プロトコル生成器は2つのブロックに細分化できます。全体図([@fig:neopixel-overview])の
 右上部がロジック-パルス変換器([@sec:logic-to-pulse])、右下部が
@@ -136,52 +164,101 @@ witdh:
 
 ### ロジック-パルス変換器 {#sec:logic-to-pulse}
 
-[^ws2818b-aki]: http://akizukidenshi.com/catalog/g/gI-07915
+生成すべきパルス列の特性については、先の通り調査済です([@sec:study-protocol])。このタイミングを生成するために
+筆者は再びディレイマクロセルを使いました。今回はワンショットモードにして
+クロック入力を`OSC2`、`DLY IN`を`800KHz`に設定しました([@fig:neopixel-pulser])。これらの回路は
+ロジック0または1のパルス幅をもったパルス列を生成し続けます。
 
-\\xout{とっても読みにくい}データシートによると、GRBの順で各8ビット、全24ビットのシリアルデータを
-書き込み、ストローブとして50us以上"L"にするとLED内に取り込まれるようです。
-シリアルデータの1/0はH/Lの割合で判定されるようです([@tbl:data-transfer-time])。
-1ビットあたり1250nsなので800KHzのシリアルデータをデューティーを変えながら送り込むことになります。
-許容差が+/-300ns[^torelance]あるので950〜1550nsの範囲で周期が変わることは許容されそうです。
-
-[^torelance]: データシートには+/-600nsとあるのですがどちらが正しいんでしょうか。
-
-[neopixel](data/neopixel.yaml){.wavedrom}
-
-Table: Data transfer time(T~H~ + T~L~ = 1250 +/-600ns) {#tbl:data-transfer-time}
-
-| Logic | T~H~ | T~L~ | Torelance | Unit |
-|:-----:|:----:|:----:|:---------:|:-----|
-|   1   | 800  | 450  |  +/-150   | ns   |
-|   0   | 400  | 850  |  +/-150   |      |
-
-これをGreenPAK流(?)にするとT~H~に合わせたワンショット出力を2種類用意して1/0で切り替える、
-という感じになりました。
-LFSRの出力をマルチプレクサの選択入力にしてディレイ時間を切り替えます([@fig:neopixel-pulser])。
-800KHzクロックの立ち上がりをディレイ入力に、クロックをOSC2出力にします。
-サンプリングのクロックは`Delayed 800KHz`、T~H~は`4.096MHz`を使います([@tbl:clock-source])。
+このパルス列をマルチプレクサに入力しLFSRの出力で切り替えます。マルチプレクサは
+LFSRがHを出力している間800nsパルスを通過させ、L期間中は400nsパルスを出させます。
 
 ![ロジック−パルス変換](images/idea1/neopixel-pulse-gen.png){#fig:neopixel-pulser}
 
 ### ストローブ信号生成器 {#sec:strobe-pulser}
 
+ストローブ信号生成器は3段のカウンタで構成されます([@fig:strobe-pulser])。1段目でLED1個分のタイミング、
+2段目で256個まで多段カスケードのためのタイミングを測り、3段目で実際のストローブ信号を
+生成します。1個分のデータ書き込み時間がT、連結数がN個、3段目の設定値がM個のとき
+`N個 x M回 x T`の期間"L"を出力したあとで`N個 x 1回 x T`の期間だけ"H"を出します。
+
+`N`や`M`の値が小さすぎるとLEDの発色の変化に目が追いつかず真っ白に見えてしまうので、適宜大きめの値を入れて
+`N x (M+1) x T`が20〜30msになるように調整すときれいになると思います。
+
+![ストローブ信号生成器](images/idea1/strobe-pulser.png){#fig:strobe-pulser}
+
+```table
+---
+markdown: True
+caption: "`CNT4/DLY4`の調整 {#tbl:config-cnt4}"
+alignment: CCC
+witdh: 
+    - 0.4
+    - 0.3
+    - 0.3
+---
+"Option","Value","Note"
+"Multi-function mode","CNT/DLY",""
+"Mode","Reset counter",""
+"Counter data","23",""
+"Edge select","Rising",""
+"Clock","Ext. Clk. (From matrix)",""
+```
+
+```table
+---
+markdown: True
+caption: "`CNT5/DLY5`の調整 {#tbl:config-cnt5}"
+alignment: CCC
+witdh: 
+    - 0.4
+    - 0.3
+    - 0.3
+---
+"Option","Value","Note"
+"Multi-function mode","CNT/DLY",""
+"Mode","Reset counter",""
+"Counter data","10",""
+"Edge select","Falling",""
+"Clock","CNT4/DLY4 (OUT)",""
+```
+
+```table
+---
+markdown: True
+caption: "`CNT0/DLY0/FSM0`の調整 {#tbl:config-cnt0}"
+alignment: CCC
+witdh: 
+    - 0.4
+    - 0.3
+    - 0.3
+---
+"Option","Value","Note"
+"Multi-function mode","CNT/DLY",""
+"Type","CNT/DLY",""
+"Mode","Counter/FSM",""
+"Counter data","10000",""
+"Edge select","Falling",""
+"Clock","Ext. Clk. (From matrix)",""
+```
+
 ## まとめ
 
 この回路ブロックを作るにはこれだけのリソースが必要です([@tbl:idea1-resources])。
-25MHz
+25MHzオシレータが必要なので移植可能な品種が限られるのと、ディレイ/カウンタマクロセルが
+6個必要なのがちょっと重いです。
 
 Table: リソースまとめ {#tbl:idea1-resources}
 
-|       Type       | Count |          Note           |
-|:----------------:|:-----:|:-----------------------:|
-|     2MHz OSC     |   1   |                         |
-|    25MHz OSC     |   1   |  for ~50ns resolution   |
-| Both Edge Detect |   1   |    2MHz OSC doubler     |
-|     CNT/DLY      | **6** | 2x One-shot, 4x Counter |
-|    Pipe Delay    |   1   |        14 depth         |
-|       DFF        |   1   |        for LFSR         |
-|   2-input LUT    |   1   |         1x XOR          |
-|   3-input LUT    |   2   |       2x 2to1MUX        |
+|       Type       | Count |               Note               |
+|:----------------:|:-----:|:--------------------------------:|
+|     2MHz OSC     |   1   |         source of 800KHz         |
+|  **25MHz OSC**   |   1   | for precise 400/800ns generation |
+| Both Edge Detect |   1   |      2MHz->4MHz OSC doubler      |
+|     CNT/DLY      | **6** |     2x One-shot, 4x Counter      |
+|    Pipe Delay    |   1   |             14 depth             |
+|       DFF        |   1   |             for LFSR             |
+|   2-input LUT    |   1   |              1x XOR              |
+|   3-input LUT    |   2   |            2x 2to1MUX            |
 
 ## 応用例として考えられるもの
 
