@@ -1,0 +1,11 @@
+{
+  signal: [
+    {name: "800K",wave: "0Hl....Hl....Hl....Hl....H"},
+    {name: "CNT2/DLY2(400ns)", wave: "0h.l...h.l...h.l...h.l...h"},
+    {name: "CNT3/DLY3(800ns)", wave: "0h...l.h...l.h...l.h...l.h"},
+    {},
+    {name: "LFSR", wave: "0h...........l.....h.....l"},
+    {name: "3-L0", wave: "0h...l.h...l.h.l...h...l.h"},
+  ],
+  config: {skin: "narrow"},
+}

@@ -1,0 +1,15 @@
+{
+  signal: [
+    {name: "OSC1(2MHz)", wave: "lH..L..H..L..H..L..H..L..H..L..H", node: ".a..b"},
+    {},
+    {name: "P DLY(4MHz)", wave: "lHl.Hl.Hl.Hl.Hl.Hl.Hl.Hl.Hl.Hl.H", phase: -1, node: ".c..d........e..f"},
+    {name: "Count", wave: "==..=..=..=..=..=..=..=..=..=..=", phase: -0.8, data: ["", "0", "1", "2", "3", "4", "0", "1", "2", "3", "4"]},
+    {},
+    {name: "CNT1/DLY1(800KHz)", wave: "HL...........H..L...........H..L", phase: -2, node: ".g...........h..i"}
+  ],
+  edge: [
+    "a~c", "b~d",
+    "c~g", "e~h", "f~i"
+  ],
+  config: {skin: "narrow"}
+}
