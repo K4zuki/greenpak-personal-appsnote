@@ -1,13 +1,17 @@
 {
   signal: [
-    {name: "1", wave: "01..0.1", node: ".a..b.c."},
-    {name: "0", wave: "01.0..1", node: ".d.e..f."},
-    {},
-    {name: "STR", wave: "10|...1", node: ".g....h"},
+    {name: "1", wave: "0h..l.h", node: ".a..b.c."},
+    {name: "0", wave: "0h.l..h", node: ".d.e..f."},
+    {name: "STR", wave: "1l|...h", node: ".g....h"},
+    {wave: "z............"},
+    {name: "Transfer(1x LED)", wave: "13|4|5|0|1", node: ".......i.j", data: ["G", "R", "B"]},
+    {wave: "z............"},
+    {name: "Transfer(3x LED)", wave: "13453453450|1", node: "..........k.l", data: ["G", "R", "B", "G", "R", "B", "G", "R", "B"]},
   ],
-edge: [
-    "a<>b 800±150ns", "b<>c 450150ns",
-    "d<>e 400±150ns", "e<>f 850150ns",
-    "g-h >50us"
-  ]
+  edge: [
+    "a-b 800±150ns", "b-c 450±150ns",
+    "d-e 400±150ns", "e-f 850±150ns",
+    "g-h >50us",
+    "i-j STR", "k-l STR"
+  ],
 }
