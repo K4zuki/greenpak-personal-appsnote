@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GPDProject version="8" oldestCompatibleVersion="8" GPDVersion="6.14.001" lastChange="2018/08/26 23:32">
+<GPDProject version="8" oldestCompatibleVersion="8" GPDVersion="6.14.001" lastChange="2018/09/05 21:14">
     <generalProjectSettings/>
     <chip family="04" type="06" friendlyName="GreenPAK 6" partNumber="36" package="7">
-        <nvmData registerLenght="2048">1D 6 0 98 3 0 62 E8 48 C0 B 0 0 0 0 0 0 0 0 F0 F8 1D E0 93 0 0 70 3E 0 74 0 D0 1 9D F 0 3E 0 0 0 0 0 1E 0 FC 0 0 0 0 0 0 C0 F 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 30 0 0 30 30 30 30 0 0 30 30 30 0 30 30 30 30 30 30 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 4 0 14 22 30 C 0 0 0 0 0 0 0 62 0 0 0 AC AC 0 0 0 0 1 0 D 12 0 0 1 0 0 E7 0 A 0 2 0 CE 4 10 0 50 0 5 2 0 50 E 10 0 EE 0 18 2 0 DD 3 0 0 2 0 1 0 0 2 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 A5</nvmData>
-        <checksum crc32="0xCB86BC63" version="6"/>
+        <nvmData registerLenght="2048">1D 6 0 98 3 0 62 E8 48 C0 B 0 0 0 0 0 0 0 0 F0 F8 1D E0 93 0 0 70 3E 0 74 0 D0 1 9D F 0 3E 0 0 0 0 0 1E 0 FC 0 0 0 0 0 0 C0 F 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 30 0 0 30 30 30 30 0 0 30 30 30 0 30 30 30 30 30 30 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 4 0 14 22 30 C 0 0 0 0 0 0 0 62 0 0 0 AC AC 0 0 0 0 1 0 D 12 0 0 1 0 0 E7 0 A 0 2 0 CE 4 10 0 50 0 5 2 0 50 E 10 0 EE 0 17 2 0 DD 3 0 0 2 0 1 0 0 2 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 A5</nvmData>
+        <checksum crc32="0xD1F85B05" version="6"/>
         <asmModel>
             <stateMachine>
                 <asmModel version="2">
@@ -439,7 +439,7 @@ N = (number of LEDs) - 1</textLabel>
             <points>(200.00,574.00); (298.00,574.00); (298.00,426.00)</points>
         </wire>
         <wire output="161" input="551" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="11" wireText="NET11" wireState="0">
-            <points>(328.00,386.00); (453.00,386.00)</points>
+            <points>(328.00,386.00); (454.00,386.00)</points>
         </wire>
         <wire output="1" input="552" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="-1" wireText="GND" wireState="1">
             <points/>
@@ -473,7 +473,7 @@ N = (number of LEDs) - 1</textLabel>
         <settings>
             <autoApply value="0"/>
             <programmingOptions programNVM="1" programEEPROM="0"/>
-            <platformSelector id="3"/>
+            <platformSelector id="0"/>
         </settings>
         <platform id="0" friendlyName="GreenPAK DIP Development Platform">
             <lastConfiguration>
