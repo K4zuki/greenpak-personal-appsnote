@@ -139,8 +139,6 @@ Table: PipeDelayの調整 {#tbl:config-pipedelay}
 このパルス列をマルチプレクサに入力しLFSRの出力で切り替えます。マルチプレクサは
 LFSRがHを出力している間800nsパルスを通過させ、L期間中は400nsパルスを出させます([@fig:neopixel-pulser-wave])。
 
-\\newpage
-
 [マルチプレクサの動作波形](data/neopixel_pulser.yaml){.wavedrom #fig:neopixel-pulser-wave}
 
 ```table
@@ -197,7 +195,7 @@ witdh:
 3段目の設定値がM回のとき、3段目のカウンタは`N個 x M回 x T`の期間"L"を出力したあとで
 `N個 x 1回 x T`の期間だけ"H"を出します([@fig:strobe-pulser-wave])。
 
-\\newpage
+<!--\\newpage-->
 
 [各カウンタの動作](data/strobe_pulse_gen.yaml){.wavedrom #fig:strobe-pulser-wave}
 
@@ -293,6 +291,15 @@ Table: リソースまとめ {#tbl:idea1-resources}
 組み合わせだったので回路を単純化できました。
 
 この次にシンプルなのは17段です。タップ17と14を使うのでXORは1個のまま、DFFを2段追加します。
+以下に16ビット長近辺で追加部品が比較的少ない組み合わせの一覧を示します。
+
+| Bit width | Pipe Delay Depth |      Taps      |  DFF  |    XOR     |
+|:---------:|:----------------:|:--------------:|:-----:|:----------:|
+|    11     |        9         |    2(11,9)     |   2   | 1x 2-input |
+|   (15)    |        14        |    2(15,14)    |   1   | 1x 2-input |
+|    17     |        14        |    2(17,14)    |   3   | 1x 2-input |
+|    20     |        16        |    2(17,20)    |   4   | 1x 2-input |
+|    24     |        16        | 4(24,23,22,17) | **8** | 3x 2-input |
 
 ### 応用(2)：通信プロトコル生成器だけ使う
 
