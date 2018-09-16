@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GPDProject version="11" oldestCompatibleVersion="11" GPDVersion="6.14.001" lastChange="2018/08/22 17:19">
+<GPDProject version="11" oldestCompatibleVersion="11" GPDVersion="6.14.001" lastChange="2018/09/16 21:26">
     <generalProjectSettings/>
     <chip family="04" type="03" friendlyName="GreenPAK 3" partNumber="6" package="2">
-        <nvmData registerLenght="512">0 0 0 40 2 0 0 70 17 7 0 18 3A 1 0 0 0 0 0 0 0 0 AD 1 0 20 69 3 50 0 8 0 C8 3 0 4 0 40 0 40 0 10 0 4 A0 5D 6B E0 CD 66 86 49 B1 9 2 80 1B 0 0 5A 8 0 0 A5</nvmData>
-        <checksum crc32="0x3C2A6978" version="0"/>
+        <nvmData registerLenght="512">0 0 0 40 2 0 0 70 17 7 0 18 3A 1 0 0 0 0 0 0 0 0 AD 1 0 20 69 3 50 0 8 0 C8 3 0 4 0 40 0 40 0 10 0 4 A0 55 6C E0 CD 66 86 49 B1 9 2 80 1B 0 0 5A 8 0 0 A5</nvmData>
+        <checksum crc32="0x6E5E4887" version="0"/>
         <VDDItem id="0" viewMode="0" min="1.7100" max="5.5000">
             <item id="0" caption="VDD (PIN 1)">
                 <graphics pos="(-240.00,0.00)" angle="0" flipping="0" hidden="0" tOrigin="(20.00,10.00)"/>
@@ -36,7 +36,7 @@
         </item>
         <IOPad id="7" useCaseMode="0">
             <item id="7" caption="PIN 8">
-                <graphics pos="(573.75,-76.25)" angle="0" flipping="1" hidden="1" tOrigin="(20.00,10.00)"/>
+                <graphics pos="(554.79,9.69)" angle="0" flipping="1" hidden="1" tOrigin="(20.00,10.00)"/>
             </item>
         </IOPad>
         <IOPad id="8" useCaseMode="1">
@@ -107,8 +107,8 @@ PIN4 &gt; 1/3x VDD =&gt; L</textLabel>
         </item>
         <item id="22" caption="A CMP1">
             <graphics pos="(-94.43,-309.88)" angle="0" flipping="0" hidden="0" tOrigin="(22.50,25.00)"/>
-            <textLabel pos="(-38.84,-38.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">PIN6 &gt; 2x 1150mV =&gt; H
-PIN6 &lt; 2x 1150mV =&gt; L</textLabel>
+            <textLabel pos="(-31.53,-38.00)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">PIN6 &gt; 2/3VDD =&gt; H
+PIN6 &lt; 2/3VDD =&gt; L</textLabel>
         </item>
         <CNTDLY id="23" externalClockFrequence="0" externalClockFreqUnit="kHz">
             <item id="23" caption="8-bit CNT0/DLY0">
@@ -190,6 +190,9 @@ PIN6 &lt; 2x 1150mV =&gt; L</textLabel>
         </wire>
         <wire output="88" input="58" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="8" wireText="NET8" wireState="0">
             <points>(488.00,-256.00); (498.00,-256.00); (498.00,-317.00); (120.00,-317.00); (120.00,-271.00); (130.00,-271.00)</points>
+        </wire>
+        <wire output="1" input="115" autoRouting="1" pen="#ff8000ff;1.00;1;32;128" protected="1" CWLid="-1" wireText="VDD" wireState="1">
+            <points/>
         </wire>
         <textLabel pos="(135.07,-307.13)" angle="0.00" textColor="#ffff00ff" backgroundColor="#14141464">S
 R
@@ -273,7 +276,7 @@ Q</textLabel>
     <simulationConfiguration version="1" compatibleVersion="1">
         <analyzes>
             <dc isGiven1="true" isGiven2="false" source1="" source2="" start1="0.000000e+0|4" start2="0.000000e+0|4" step1="1.000000e+2|5" step2="0.000000e+0|4" stop1="3.300000e+0|4" stop2="0.000000e+0|4" temp="25" vdd="3.300000e+0|4"/>
-            <tran max="2.000000e+1|6" start="0.000000e+0|5" step="2.000000e+1|6" stop="1.200000e+1|5" temp="25" uic="false" vdd="5.000000e+0|4"/>
+            <tran max="2.000000e+1|6" start="0.000000e+0|5" step="2.000000e+1|6" stop="1.200000e+1|5" temp="25" uic="false" vdd="3.000000e+0|4"/>
         </analyzes>
         <simTools>
             <items_counter counter_val="0"/>
@@ -288,9 +291,9 @@ Q</textLabel>
                 <gnd model_id="36" term_id="0"/>
             </gnds>
             <srcs>
-                <vsrc model_id="26" term_id="2" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="1.000000e+0|5" viewName="PIN 4 (Src)" spiceName="src_2" maxU="3.300000e+0|4" minU="0.000000e+0|4" mode="0" t1="5.000000e-1|5" t2="5.000000e+0|5" t3="1.000000e+0|5" t4="5.000000e+0|6" type="trapeze"/>
-                <vsrc model_id="27" term_id="2" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="1.000000e+0|5" viewName="PIN 6 (Src)" spiceName="src_1" maxU="5.000000e+0|4" minU="0.000000e+0|4" mode="0" t1="5.000000e-1|5" t2="5.000000e+0|5" t3="1.000000e+0|5" t4="5.000000e+0|6" type="trapeze"/>
-                <vsrc model_id="35" term_id="0" hasRC="1" intR="1.000000e+1|4" intC="1.000000e+2|7" showOnePer="0" hasLimitedVoltage="0" td="0.000000e+0|5" viewName="VDD" spiceName="src_main" V="5.000000e+0|4" tr="1.000000e+0|6" type="ramp"/>
+                <vsrc model_id="26" term_id="2" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="1.000000e+0|5" viewName="PIN 4 (Src)" spiceName="src_1" maxU="3.000000e+0|4" minU="0.000000e+0|4" mode="0" t1="5.000000e-1|5" t2="5.000000e+0|5" t3="1.000000e+0|5" t4="5.000000e+0|6" type="trapeze"/>
+                <vsrc model_id="27" term_id="2" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="1.000000e+0|5" viewName="PIN 6 (Src)" spiceName="src_2" maxU="3.000000e+0|4" minU="0.000000e+0|4" mode="0" t1="5.000000e-1|5" t2="5.000000e+0|5" t3="1.000000e+0|5" t4="5.000000e+0|6" type="trapeze"/>
+                <vsrc model_id="35" term_id="0" hasRC="1" intR="1.000000e+1|4" intC="1.000000e+2|7" showOnePer="0" hasLimitedVoltage="0" td="0.000000e+0|5" viewName="VDD" spiceName="src_main" V="3.000000e+0|4" tr="1.000000e+0|6" type="ramp"/>
             </srcs>
         </simTools>
         <output>
