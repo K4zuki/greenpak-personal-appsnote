@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GPDProject version="11" oldestCompatibleVersion="11" GPDVersion="6.14.001" lastChange="2018/09/17 0:06">
+<GPDProject version="11" oldestCompatibleVersion="11" GPDVersion="6.14.001" lastChange="2018/09/17 19:19">
     <generalProjectSettings/>
     <chip family="04" type="03" friendlyName="GreenPAK 3" partNumber="6" package="2">
         <nvmData registerLenght="512">0 0 0 40 2 0 0 70 17 7 0 18 3A 1 0 0 0 0 0 0 0 0 AD 1 0 20 69 3 50 0 8 0 C8 3 0 4 0 40 0 40 0 10 0 4 A0 55 6C E0 CD 66 86 49 B1 9 2 80 1B 0 0 5A 8 0 0 A5</nvmData>
@@ -165,7 +165,7 @@ PIN6 &lt; 2/3VDD =&gt; L</textLabel>
             <points>(-29.00,-284.00); (130.00,-284.00)</points>
         </wire>
         <wire output="53" input="60" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="6" wireText="NET6" wireState="0">
-            <points>(29.00,-170.00); (104.00,-170.00); (104.00,-298.00); (130.00,-298.00)</points>
+            <points>(29.00,-170.00); (120.00,-170.00); (120.00,-298.00); (130.00,-298.00)</points>
         </wire>
         <wire output="31" input="161" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="2" wireText="NET2" wireState="0">
             <points>(201.00,-284.00); (274.00,-284.00); (274.00,-260.00); (284.00,-260.00)</points>
@@ -189,7 +189,7 @@ PIN6 &lt; 2/3VDD =&gt; L</textLabel>
             <points/>
         </wire>
         <wire output="88" input="58" autoRouting="1" pen="#00ff00ff;1.00;1;32;128" protected="0" CWLid="8" wireText="NET8" wireState="0">
-            <points>(488.00,-256.00); (498.00,-256.00); (498.00,-317.00); (120.00,-317.00); (120.00,-271.00); (130.00,-271.00)</points>
+            <points>(488.00,-256.00); (498.00,-256.00); (498.00,-317.00); (110.00,-317.00); (110.00,-271.00); (130.00,-271.00)</points>
         </wire>
         <wire output="1" input="115" autoRouting="1" pen="#ff8000ff;1.00;1;32;128" protected="1" CWLid="-1" wireText="VDD" wireState="1">
             <points/>

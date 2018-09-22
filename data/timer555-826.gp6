@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GPDProject version="8" oldestCompatibleVersion="8" GPDVersion="6.14.001" lastChange="2018/09/17 2:20">
+<GPDProject version="8" oldestCompatibleVersion="8" GPDVersion="6.14.001" lastChange="2018/09/17 19:19">
     <generalProjectSettings/>
     <chip family="04" type="06" friendlyName="GreenPAK 6" partNumber="36" package="7">
-        <nvmData registerLenght="2048">13 0 0 0 0 0 4E 8E 7B 52 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 F0 FF 0 0 0 0 0 0 0 0 0 0 0 0 CE 3F FD 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 71 33 0 30 30 30 30 0 0 30 30 30 0 4 7C 30 30 33 30 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 4 0 34 22 30 C FE 89 0 0 0 0 0 5 0 0 0 F2 40 0 0 0 0 40 0 0 0 0 0 0 0 0 20 0 1 0 0 0 2 1 0 0 2 0 1 0 0 2 1 0 0 2 0 1 0 0 2 1 0 0 2 0 1 0 0 2 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 A5</nvmData>
-        <checksum crc32="0x2887CD44" version="6"/>
+        <nvmData registerLenght="2048">13 0 0 0 0 0 4E 8E 7B 52 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 F0 FF 0 0 0 0 0 0 0 0 0 0 0 0 CE 3F FD 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 71 33 0 30 30 30 30 0 0 30 30 30 0 4 5C 30 30 33 30 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 4 0 34 32 30 C FE 89 0 0 0 0 0 5 0 0 0 F2 50 0 0 0 0 40 0 0 0 0 0 0 0 0 20 0 1 0 0 0 2 1 0 0 2 0 1 0 0 2 1 0 0 2 0 1 0 0 2 1 0 0 2 0 1 0 0 2 0 1 0 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 A5</nvmData>
+        <checksum crc32="0x485F87D6" version="6"/>
         <asmModel>
             <stateMachine>
                 <asmModel version="2">
@@ -488,7 +488,7 @@ Q</textLabel>
     <simulationConfiguration version="1" compatibleVersion="1">
         <analyzes>
             <dc isGiven1="true" isGiven2="false" source1="" source2="" start1="0.000000e+0|4" start2="0.000000e+0|4" step1="1.000000e+2|5" step2="0.000000e+0|4" stop1="3.300000e+0|4" stop2="0.000000e+0|4" temp="25" vdd="3.300000e+0|4"/>
-            <tran max="2.000000e+1|6" start="0.000000e+0|5" step="2.000000e+1|6" stop="1.200000e+1|5" temp="25" uic="false" vdd="3.300000e+0|4"/>
+            <tran max="2.000000e+1|6" start="0.000000e+0|5" step="2.000000e+1|6" stop="1.420000e+1|5" temp="25" uic="false" vdd="3.300000e+0|4"/>
         </analyzes>
         <simTools>
             <items_counter counter_val="0"/>
@@ -503,9 +503,9 @@ Q</textLabel>
             </gnds>
             <srcs>
                 <vsrc model_id="0" term_id="0" hasRC="1" intR="1.000000e+1|4" intC="1.000000e+2|7" showOnePer="0" hasLimitedVoltage="0" td="0.000000e+0|5" viewName="VDD" spiceName="src_main" V="3.300000e+0|4" tr="1.000000e+0|5" type="ramp"/>
-                <vsrc model_id="0" term_id="2" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="1.000000e+0|5" viewName="PIN 3 (Src)" spiceName="src_1" maxU="3.300000e+0|4" minU="0.000000e+0|4" mode="0" t1="1.000000e+0|6" t2="3.000000e+0|5" t3="1.000000e+0|6" t4="1.000000e+0|6" type="trapeze"/>
+                <vsrc model_id="0" term_id="2" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="2.000000e+0|5" viewName="PIN 3 (Src)" spiceName="src_1" maxU="3.300000e+0|4" minU="0.000000e+0|4" mode="0" t1="1.000000e+0|6" t2="6.000000e+0|5" t3="1.000000e+0|6" t4="1.000000e+0|6" type="trapeze"/>
                 <vsrc model_id="0" term_id="13" hasRC="1" intR="1.000000e+1|4" intC="1.000000e+2|7" showOnePer="0" hasLimitedVoltage="1" td="0.000000e+0|5" viewName="VDD2" spiceName="src_secondary" V="3.300000e+0|4" tr="1.000000e+0|5" type="ramp"/>
-                <vsrc model_id="0" term_id="18" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="1.000000e+0|5" viewName="PIN 19 (Src)" spiceName="src_2" maxU="3.300000e+0|4" minU="0.000000e+0|4" mode="0" t1="1.000000e+0|6" t2="3.000000e+0|5" t3="1.000000e+0|6" t4="1.000000e+0|6" type="trapeze"/>
+                <vsrc model_id="0" term_id="18" hasRC="0" intR="1.000000e+1|4" intC="1.000000e+1|8" showOnePer="0" hasLimitedVoltage="1" td="2.000000e+0|5" viewName="PIN 19 (Src)" spiceName="src_2" maxU="3.300000e+0|4" minU="0.000000e+0|4" mode="0" t1="1.000000e+0|6" t2="6.000000e+0|5" t3="1.000000e+0|6" t4="1.000000e+0|6" type="trapeze"/>
             </srcs>
         </simTools>
         <output>
