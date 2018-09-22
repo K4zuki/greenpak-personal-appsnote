@@ -39,7 +39,7 @@ NeoPixelというのは、いわゆるテープLEDによく使われている、
 
 ## 全体図
 
-制作した回路の全体図を示します([@fig:neopixel-overview])。左上がクロック生成器([@sec:clock-generator])、
+製作した回路の全体図を示します([@fig:neopixel-overview])。左上がクロック生成器([@sec:clock-generator])、
 右側は上段から通信プロトコル生成器([@sec:protocol-generator])、擬似乱数生成器([@sec:lfsr])、
 ストローブ生成器([@sec:strobe-pulser])です。
 
