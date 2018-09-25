@@ -267,16 +267,17 @@ witdh:
 
 Table: リソースまとめ {#tbl:idea1-resources}
 
-|       Type       | Count |               Note               |
-|:----------------:|:-----:|:--------------------------------:|
-|     2MHz OSC     |   1   |         source of 800KHz         |
-|  **25MHz OSC**   |   1   | for precise 400/800ns generation |
-| Both Edge Detect |   1   |      2MHz->4MHz OSC doubler      |
-|     CNT/DLY      | **6** |     2x One-shot, 4x Counter      |
-|    Pipe Delay    |   1   |             14 depth             |
-|       DFF        |   1   |             for LFSR             |
-|   2-input LUT    |   1   |              1x XOR              |
-|   3-input LUT    |   2   |            2x 2to1MUX            |
+|        Type        | Count |               Note               |
+|:------------------:|:-----:|:--------------------------------:|
+|      2MHz OSC      |   1   |         source of 800KHz         |
+|   **25MHz OSC**    |   1   | for precise 400/800ns generation |
+|  Both Edge Detect  |   1   |      2MHz->4MHz OSC doubler      |
+|      CNT/DLY       | **6** |     2x One-shot, 4x Counter      |
+|     Pipe Delay     |   1   |             14 depth             |
+|        DFF         |   1   |             for LFSR             |
+|    2-input LUT     |   1   |              1x XOR              |
+|    3-input LUT     |   2   |            2x 2to1MUX            |
+| Digital Output pin |   1   |              1x P-P              |
 
 ## おまけ：応用例として考えられるもの
 
