@@ -1,14 +1,13 @@
 ---
 title: "GreenPAK^TM^ **勝手に**アプリケーションノート"
-abstract: NeoPixelでランダムＬチカ
-#/555をエミュレーションする
+abstract: NeoPixelでランダムＬチカ/555互換回路
 circle: KY技研
 author: "@_K4ZUKI_"
 comiket: 技術書典5
 year: 2018
 publisher: 印刷会社で印刷製本
 docrevision: "1.0"
-# front: images/front-image.png
+front: images/computer-lsi.png
 verbcolored: true
 rmnote: true
 strikeout: true
