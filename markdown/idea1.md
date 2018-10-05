@@ -43,9 +43,10 @@ NeoPixelというのは、いわゆるテープLEDによく使われている、
 右側は上段から通信プロトコル生成器([@sec:protocol-generator])、擬似乱数生成器([@sec:lfsr])、
 ストローブ生成器([@sec:strobe-pulser])です。
 
-\\newpage
 
-![全体図](images/idea1/overview.png){#fig:neopixel-overview}
+![全体図](images/idea1/overview.png){#fig:neopixel-overview width=120mm}
+
+\\newpage
 
 ## クロック生成器 {#sec:clock-generator}
 
@@ -67,9 +68,9 @@ Table: 必要なクロック {#tbl:clock-source}
 [^not-2M]: SLG46826だと厳密には2.048MHzですが、LED側のタイミング定義がゆるいので
 こちらの定義もゆるめで行きます。
 
-![OSC1周辺回路](images/idea1/clock-gen.png){#fig:clock-gen-sch}
+![OSC1周辺回路](images/idea1/clock-gen.png){#fig:clock-gen-sch width=120mm}
 
-[800KHzクロック生成](data/osc-config.yaml){.wavedrom #fig:clock-gen-wave}
+[800KHzクロック生成](data/osc-config.yaml){.wavedrom #fig:clock-gen-wave width=120mm}
 
 Table: `OSC1`の調整 {#tbl:config-osc1}
 
@@ -101,7 +102,9 @@ Wikipedia「線形帰還シフトレジスタ(LFSR)」の項目[^lfsr-wikipedia]
 を作りました([@fig:linear-feedback-shift-register])。この回路はランダムビット列を
 生成し続けます。
 
-![LFSRブロック](images/idea1/lfsr-gen.png){#fig:linear-feedback-shift-register}
+\\newpage
+
+![LFSRブロック](images/idea1/lfsr-gen.png){#fig:linear-feedback-shift-register width=120mm}
 
 [^lfsr-wikipedia]: https://ja.wikipedia.org/wiki/%E7%B7%9A%E5%BD%A2%E5%B8%B0%E9%82%84%E3%82%B7%E3%83%95%E3%83%88%E3%83%AC%E3%82%B8%E3%82%B9%E3%82%BF
 [^lfsr-appsnote]: https://www.xilinx.com/support/documentation/application_notes/xapp052.pdf
@@ -134,7 +137,7 @@ Table: PipeDelayの調整 {#tbl:config-pipedelay}
 クロック入力を`OSC2`、`DLY IN`を`800KHz`に設定します([@fig:neopixel-pulser-sch])。これらの回路は
 ロジック0または1のパルス幅をもったパルス列を生成し続けます。
 
-![ロジック−パルス変換](images/idea1/neopixel-pulse-gen.png){#fig:neopixel-pulser-sch}
+![ロジック−パルス変換](images/idea1/neopixel-pulse-gen.png){#fig:neopixel-pulser-sch width=120mm}
 
 このパルス列をマルチプレクサに入力しLFSRの出力で切り替えます。マルチプレクサは
 LFSRがHを出力している間800nsパルスを通過させ、L期間中は400nsパルスを出させます([@fig:neopixel-pulser-wave])。
@@ -177,7 +180,7 @@ witdh:
 "Clock","OSC2",
 ```
 
-\\newpage
+<!--\\newpage-->
 
 ### ストローブ信号生成器 {#sec:strobe-pulser}
 
@@ -194,8 +197,6 @@ witdh:
 一般化して1個分のデータ書き込み時間がT、連結数がN個(2段目の設定値は*(N−1)*)、
 3段目の設定値がM回のとき、3段目のカウンタは`N個 x M回 x T`の期間"L"を出力したあとで
 `N個 x 1回 x T`の期間だけ"H"を出します([@fig:strobe-pulser-wave])。
-
-<!--\\newpage-->
 
 [各カウンタの動作](data/strobe_pulse_gen.yaml){.wavedrom #fig:strobe-pulser-wave}
 

@@ -30,16 +30,14 @@ Wikipedia^[https://en.wikipedia.org/wiki/555_timer_IC]を参考にしました�
 RS反転FFの反転出力が出力段(`OUT`)と放電NPNトランジスタ(`DISCHARGE`)につながっています
 ([@fig:block-diagram])。
 
-\\newpage
-
 ![等価回路図](images/idea2/timer555block.png){#fig:block-diagram}
+
+\\newpage
 
 ## 全体図
 
 製作した回路の全体図を示します([@fig:timer555-overview])。コンパレータ2個、DFF1個、OSC1個、
 NOT回路1個、3入力LUT1個のシンプルな構成です。出力段と放電NPNトランジスタはIOの機能を使います。
-
-\\newpage
 
 ![全体図](images/idea2/overview.png){#fig:timer555-overview}
 
@@ -55,6 +53,8 @@ GreenPAKの電圧ソース選択にはいくつかの制限事項があります
 
 下調べしたとおり、コンパレータ2個にはそれぞれ1/3VDDと2/3VDDが入力され、
 外部電圧(`THRESHOLD`、`nTRIGGER`)と比較されます。
+
+\\newpage
 
 ### 2/3VDD vs. `THRESHOLD`
 
@@ -93,6 +93,8 @@ Table: `PIN19(IO13)`の調整
 
 コンパレータマクロセルはCMP0Hを使いました。
 
+\\newpage
+
 Table: `CMP0H`の調整
 
 |   Option   |         Value         | Note |
@@ -122,6 +124,14 @@ Table: `3-bit LUT0`の調整
 |:------:|:-----:|:----:|
 |  Type  |  LUT  |      |
 
+Table: `OSC1`の調整
+
+|     Option     |     Value      | Note |
+|:--------------:|:--------------:|:----:|
+| OSC power mode | Force Power On |      |
+
+\\newpage
+
 Table: 真理値表($D = S + Q * nR$) {#tbl:truth-table}
 
 | IN2(**S**) | IN1(**R**) | IN0(**Q**) | OUT(**D**) |
@@ -134,12 +144,6 @@ Table: 真理値表($D = S + Q * nR$) {#tbl:truth-table}
 |     1      |     0      |     1      |   **1**    |
 |     1      |     1      |     0      |   **1**    |
 |     1      |     1      |     1      |   **1**    |
-
-Table: `OSC1`の調整
-
-|     Option     |     Value      | Note |
-|:--------------:|:--------------:|:----:|
-| OSC power mode | Force Power On |      |
 
 Table: `3-bit LUT1`の調整
 
@@ -182,6 +186,7 @@ Table: `PIN16(IO10)`の調整
 |    Resistor    |      Pull Up       |      |
 | Resistor value |        10K         |      |
 
+\\newpage
 
 ## まとめ
 
