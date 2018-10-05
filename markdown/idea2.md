@@ -24,7 +24,7 @@ RS反転FFの反転出力が出力段(`OUT`)と放電NPNトランジスタ(`DISC
 
 \\newpage
 
-[等価回路図](data/timer555-block.txt){.aafigure #fig:block-diagram}
+![等価回路図](images/idea2/timer555block.png){#fig:block-diagram}
 
 ## 全体図
 
@@ -185,16 +185,28 @@ Table: リソースまとめ {#tbl:idea2-resources}
 |        Type        | Count |           Note           |
 |:------------------:|:-----:|:------------------------:|
 |        DFF         |   1   |          RS-FF           |
-|    3-input LUT     |   1   |          RS-FF           |
-|        OSC         |   1   |     RS-FF DFF clock      |
+|    3-input LUT     |   1   |     RS-FF; DFF input     |
+|        OSC         |   1   |     RS-FF; DFF clock     |
 |    2-input LUT     |   1   |       1x Inverter        |
 | Analog comparator  |   2   |                          |
 |  Analog Input pin  |   2   |                          |
 | Digital Input pin  |   1   |          w/ PU           |
 | Digital Output pin |   2   | 1x P-P, 1x OD(Nch w/ PU) |
 
+## おまけ：応用回路例…は探せば見つかるよ
+
+この回路は既存のかなり有名な石の劣化コピーなのでWikiPediaなりを見ていただければ
+応用例はすぐに見つかります。モノステーブル（ワンショットタイマ）・アステーブル（オシレータ）
+の項目を探してください。
+
+## おまけ（2）：外部リファレンス入力…は無理
+
+秋月で入手できるLMC555のデータシートにはPWM出力する応用例がありますが、
+それを含めて外部から`CONTROL`ピンに外部リファレンス入力する方法がありません。
+
+…って考えてたら`nTRIGGER`をコンパレータの＋入力に入れて、LUT調節で行けるかも感が出てきました。
+でも読者の皆さんの自習のためにあえて答えを書かないでおきます（大学の教科書風）。
 <!--
 ## ワンショット(モノステーブル)回路
 ## フリーラン・オシレータ(アステーブル)回路
-## 外部リファレンス入力…は無理
 -->
