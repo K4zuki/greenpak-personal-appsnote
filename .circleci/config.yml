@@ -6,7 +6,7 @@ jobs:
     steps:
     - checkout
     - run:
-        name: get submodule
+        name: get submodules
         command: git submodule update --init
     - run:
         name: Prepare ghr
@@ -16,27 +16,27 @@ jobs:
           wget -c https://github.com/tcnksm/ghr/releases/download/v0.5.4/ghr_v0.5.4_linux_amd64.zip
           unzip -e ghr_v0.5.4_linux_amd64.zip
           cp ./ghr /usr/local/bin
-        - run:
-            name: Prepare QR code for this build
-            command: |
-              make initdir
-              pip3 install qrcode
-              qr https://github.com/K4zuki/greenpak-personal-appsnote/releases/download/build-`git rev-parse --short HEAD`/GPAK-AppsNote-`git rev-parse --short HEAD`.pdf > images/QRcode.png
-        - run:
-            name: Make HTML
-            command: make initdir html
-        - run:
-            name: Make PDF
-            command: make initdir pdf
-        - run:
-            name: Make DOCX
-            command: make initdir docx
-        - run:
-            name: Deploy preparation
-            command: |
-              mkdir deploy
-              mv Out/*.html deploy/
-              mv Out/*.pdf deploy/
-        - run:
-            name: Deploy
-            command: ghr -replace -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME build-`git rev-parse --short HEAD` deploy/
+    - run:
+        name: Prepare QR code for this build
+        command: |
+          make initdir
+          pip3 install qrcode
+          qr https://github.com/K4zuki/greenpak-personal-appsnote/releases/download/build-`git rev-parse --short HEAD`/GPAK-AppsNote-`git rev-parse --short HEAD`.pdf > images/QRcode.png
+    - run:
+        name: Make HTML
+        command: make initdir html
+    - run:
+        name: Make PDF
+        command: make initdir pdf
+    - run:
+        name: Make DOCX
+        command: make initdir docx
+    - run:
+        name: Deploy preparation
+        command: |
+          mkdir deploy
+          mv Out/*.html deploy/
+          mv Out/*.pdf deploy/
+    - run:
+        name: Deploy
+        command: ghr -replace -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME build-`git rev-parse --short HEAD` deploy/
