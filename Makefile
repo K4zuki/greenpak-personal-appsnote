@@ -14,6 +14,7 @@ PROJECT= `pwd`
 
 # CONFIG:= config.yaml
 # INPUT:= TITLE.md
-TARGET:= GPAK-AppsNote
+BRANCH:= '$(shell git rev-parse --abbrev-ref HEAD)'
+TARGET:= GPAK-AppsNote-$(BRANCH)-$(HASH)
 ##
 include $(MISC)/Makefile
