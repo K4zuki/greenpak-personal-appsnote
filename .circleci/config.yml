@@ -28,9 +28,9 @@ jobs:
     - run:
         name: Make PDF
         command: make initdir pdf
-    - run:
-        name: Make DOCX
-        command: make initdir docx
+    #    - run:
+    #        name: Make DOCX
+    #        command: make initdir docx
     - run:
         name: Deploy preparation
         command: |
