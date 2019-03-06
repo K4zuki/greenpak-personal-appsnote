@@ -1,7 +1,7 @@
 ifeq ($(OS),Windows_NT)
 HOME = C:/Users/$(USERNAME)
 endif
-PANSTYLES= /var
+PANSTYLES= /usr/local/var
 MISC= $(PANSTYLES)/pandoc_misc
 include $(MISC)/Makefile.in
 PROJECT= `pwd`
